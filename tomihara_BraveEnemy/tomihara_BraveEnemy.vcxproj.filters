@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\charter.F.cpp">
+      <UniqueIdentifier>{d088bb68-f38f-4d53-a5bf-f158f3b9975d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\charter.F.cpp\Brave.F.cpp">
+      <UniqueIdentifier>{2ca06bec-8a77-4615-ad04-cc26f6017ded}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\charter.F.cpp\Enemy.F.cpp">
+      <UniqueIdentifier>{aed59c67-91f8-46f6-ab19-52acb5e7597e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Character.F.cpp">
+      <UniqueIdentifier>{cb9977e4-926f-4508-94b2-0f9eaaaddc7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Character.F.cpp\brave.F.cpp">
+      <UniqueIdentifier>{ca4af0fb-7d86-4b51-9fad-3ab516c73a57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Character.F.cpp\Enemy.F.cpp">
+      <UniqueIdentifier>{4be120a2-7c39-4bb3-8ce6-c720059f0fac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tomihara_BraveEnemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Battle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>ソース ファイル\charter.F.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="TeamMember.cpp">
+      <Filter>ソース ファイル\charter.F.cpp\Brave.F.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Brave.cpp">
+      <Filter>ソース ファイル\charter.F.cpp\Brave.F.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>ソース ファイル\charter.F.cpp\Enemy.F.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>ソース ファイル\charter.F.cpp\Enemy.F.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>ソース ファイル\charter.F.cpp\Enemy.F.cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Battle.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>ヘッダー ファイル\Character.F.cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="TeamMember.h">
+      <Filter>ヘッダー ファイル\Character.F.cpp\brave.F.cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Brave.h">
+      <Filter>ヘッダー ファイル\Character.F.cpp\brave.F.cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>ヘッダー ファイル\Character.F.cpp\Enemy.F.cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>ヘッダー ファイル\Character.F.cpp\Enemy.F.cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>ヘッダー ファイル\Character.F.cpp\Enemy.F.cpp</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
