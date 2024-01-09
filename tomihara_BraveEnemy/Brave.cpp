@@ -19,7 +19,7 @@ Brave::Brave(const char* name) : TeamMember(name)
 	SkillCheck[HOIM] = true;
 	SkillCheck[DEIN] = true;
 
-	SkillConstructorLook();
+	SkillConstructorLook();//ŠƒXƒLƒ‹‚ğŠm’è‚·‚éŠÖ”
 }
 Brave::~Brave()
 {

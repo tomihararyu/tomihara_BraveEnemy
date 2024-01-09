@@ -6,5 +6,4 @@ public:
 	Brave();
 	Brave(const char* name);//コンストラクタでステータスを追加。
 	virtual ~Brave();
-
 };

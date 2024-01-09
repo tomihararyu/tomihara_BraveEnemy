@@ -8,7 +8,7 @@
 using namespace std;
 
 
-Character::Character(const char* pName) {
+Character::Character(const char* pName) {//コンストラクタ
 	_pName = new char[strlen(pName) + 1];
 	strcpy(_pName, pName);
 
@@ -18,9 +18,9 @@ Character::Character(const char* pName) {
 	Skillpul[POIZN] = &Character::poison;
 	Skillpul[DEIN] = &Character::dein;
 
-
+	SkillProcess = new int[1];//スキルを数える際に毎回新しくdeleteする為一時的にnew
 }
-Character::~Character()
+Character::~Character()//デストラクタ
 {
 	if (_pName != nullptr)
 	{
@@ -33,59 +33,65 @@ Character::~Character()
 		SkillProcess = nullptr;
 	}
 }
-void Character::SkillConstructorLook()
+void Character::SkillConstructorLook()//所持しているスキルの番号を配列に入れる
 {
-	int timp = 0;
-	for (int i = 0; i < SKILLNUM; i++)
+	if (SkillProcess != nullptr)//毎回呼び出す度にスキルをdelete
 	{
-		if (SkillCheck[i] == true)
+		delete SkillProcess;
+		SkillProcess = nullptr;
+	}
+
+	int timp = 0;//所持しているスキルの数を数える
+	for (int i = 0; i < SKILLNUM; i++)//スキルの数回繰り返す
+	{
+		if (SkillCheck[i] == true)//コンストラクタでtrueにしたスキルを数える
 		{
 			timp++;
 		}
 	}
 
-	skillMAXnum = timp;
+	skillMAXnum = timp;//結果を代入
 
-	SkillProcess = new int[skillMAXnum];
+	SkillProcess = new int[skillMAXnum];//所持しているスキルの数分動的に確保
 	int j = 0;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < SKILLNUM; i++)//スキルの数回繰り返す
 	{
-		if (SkillCheck[i] == true)
+		if (SkillCheck[i] == true)//trueだったら
 		{
-			SkillProcess[j] = i;
+			SkillProcess[j] = i;//変数に入れる
 			j++;
 		}
 	}
 }
-const char* Character::getName()
+const char* Character::getName()//名前を返す関数
 {
 	return _pName;
 }
-int Character::attack()
+int Character::attack()//継承先で使う仮想関数
 {
 	cout << "親" << endl;
 	return 0;
 }
-void Character::DamageTrade(int Damege)
+void Character::DamageTrade(int Damege)//引数でダメージを持ってきてダメージからDF分引いてHPを減らす
 {
-	if (Damege != 0)
+	if (Damege != 0)//ダメージが0以外だったら
 	{
-		int timp = (Damege - state[DF]) + rand() % 3;
-		if (timp <= 0)
+		int timp = (Damege - state[DF]) + rand() % 3;//多少ダメージをランダムに
+		if (timp <= 0)//いらなそう
 		{
 			timp = 0;
 		}
 
-		if (state[HP] - timp <= 0)
+		if (state[HP] - timp <= 0)//ダメージがHPを超過しないようにする処理
 		{
 			state[HP] = 0;
 		}
-		else
+		else//普通にHPから引く
 		{
 			state[HP] -= timp;
 		}
 
-		if (state[HP] != 0)
+		if (state[HP] != 0)//表示
 		{
 			cout << timp << " ダメージ!!  " << _pName << "のHPが" << state[HP] << "になった" << endl;
 		}
@@ -99,20 +105,20 @@ void Character::DamageTrade(int Damege)
 }
 int Character::SpeedCheck()
 {
-	if (state[NP] < 0)
+	if (state[NP] < 0)//HPがマイナスにならないようにする処理 //後で関数化する
 	{
 		state[NP] = 0;
 	}
 	return state[DEX];
 }
-int Character::taiatari()
+int Character::taiatari()//体当たり
 {
 	cout << _pName << "の体当たり!! 衝撃で" << _pName << "のHPが" << 2 << "減った\n" << endl;
 	state[HP] -= 2;
 	return 6 + state[POW];
 
 }
-int Character::hoimi()
+int Character::hoimi()//ホイミ
 {
 	state[HP] += 2 * state[INT] / 10;
 	state[NP] -= skillCharNP[HOIM];
@@ -120,36 +126,34 @@ int Character::hoimi()
 	cout << _pName << "の" << stateNam[HP] << "が" << 2 * state[INT] / 10 << "回復した" << endl;
 	return 0;
 }
-int Character::haner()
+int Character::haner()//跳ねる
 {
 	cout << _pName << "の跳ねる!!" << endl;
 
 	cout << _pName << "は元気に跳ねている!!!" << endl;
 	return 0;
 }
-int Character::poison()
+int Character::poison()//毒
 {
 	cout << _pName << "の毒霧!!\n毒霧を吐いた" << endl;
 	state[NP] -= skillCharNP[POIZN];
 	return 23;
-
 }
-int Character::dein()
+int Character::dein()//デイン
 {
 	cout << _pName << "のデイン!!" << endl;
 	state[NP] -= skillCharNP[DEIN];
 	return 10 + state[INT];
-
 }
-int Character::GetHP()
+int Character::GetHP()//HPを返す
 {
 	return state[HP];
 }
-int Character::NPGet()
+int Character::NPGet()//NPを返す
 {
 	return state[NP];
 }
-void Character::AllstateOpen()
+void Character::AllstateOpen()//一人のステータスを表示
 {
 	cout << "====================" << endl;
 	cout << _pName << ":: ";
@@ -159,7 +163,7 @@ void Character::AllstateOpen()
 	}
 	cout << "\n====================" << endl;
 }
-void Character::ChangeName()
+void Character::ChangeName()//名前の変更
 {
 	char* TimpName;
 	TimpName = new char[50];
@@ -186,25 +190,14 @@ void Character::ChangeName()
 
 
 }
-//void Character::deathjud()
+//bool Character::HPbool(int num)
 //{
-//	if (state[HP] <= 0)
+//	if (num <= 0)
 //	{
-//		deathbool = true;
+//		return true;
+//	}
+//	else
+//	{
+//		return false;
 //	}
 //}
-//int Character::deathInt()
-//{
-//	return deathbool;
-//}
-bool Character::HPbool(int num)
-{
-	if (num <= 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}

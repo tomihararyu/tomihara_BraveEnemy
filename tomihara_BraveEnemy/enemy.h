@@ -6,5 +6,5 @@ class Enemy :public Character
 public:
 	Enemy(const char* pName);
 public:
-	int attack()override;
+	int attack()override;//—”‚ÅUŒ‚
 };

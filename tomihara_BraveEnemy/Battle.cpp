@@ -6,7 +6,7 @@
 #include"Character.h"
 using namespace std;//using‚ğg—p‚µ‚Ä‚¢‚é‚Ì‚Écout‚ªB–†‚Æ‚©Œ¾‚í‚ê‚½‚©‚ç‚µ‚å‚¤‚ª‚È‚­std::‚Â‚¯‚Ä‚Ü‚·
 
-void next()
+static void next()
 {
 	int timp;
 	std::cout << "wŸ‚Öx >";
@@ -49,7 +49,7 @@ static void EnemyStraightOpen(Enemy** enemy, int num, int speed[]/*‚±‚±ˆê‚Â‚É‚µ‚
 	}
 	std::cout << endl;
 }
-static void BraveStraightOpen(TeamMember** brave, int num, int speed[])
+static void BraveStraightOpen(TeamMember** brave, int num, int speed[]/*ƒXƒe[ƒ^ƒX‚Ì•\¦—p*/)
 {
 	std::cout << std::left;
 	for (int i = 0; i < num; i++)
@@ -96,7 +96,7 @@ static void BraveStraightOpen(TeamMember** brave, int num, int speed[])
 	}
 	std::cout << endl;
 }
-static int SpeedCount(int Pspeed[], int Espeed[], int Pnum, int Enum)
+static int SpeedCount(int Pspeed[], int Espeed[], int Pnum, int Enum)//“G‚Æ–¡•û‚Åˆê”ÔDEX‚ª‘‚¢“z‚ğ’T‚·
 {
 	int	Ptimp1 = Pspeed[0];
 	int Ptimp2 = 0;
@@ -128,7 +128,7 @@ static int SpeedCount(int Pspeed[], int Espeed[], int Pnum, int Enum)
 		return Ptimp2;
 	}
 }
-static int enemyNameOpen(Enemy** enemy, int num)
+static int enemyNameOpen(Enemy** enemy, int num)//–¼‘O‚ğ•\¦‚µ‚Äƒ^[ƒQƒbƒg‚ğŒˆ’è‚·‚é
 {
 	for (int i = 0; i < num; i++)
 	{
@@ -149,47 +149,60 @@ static int enemyNameOpen(Enemy** enemy, int num)
 }
 void Battle::battleStart(TeamMember* brave[], Enemy* enemy[], int Enum, int Pnum)
 {
-	const int EPnum = Enum + Pnum;
-	bool speedBool[10];//’è”‚Æ‚µ‚Äˆµ‚¦‚È‚¢‚©‚ç‚µ‚å‚¤‚ª‚È‚­‘å‚«‚­—pˆÓ‚µ‚Ä‚¢‚é//Œã‚Å¡‚·
+	
+	int* B_hp;//•ÏX‚ª–Ê“|‚¾‚©‚ç‰Šú’l‚ğ•Û‚µ‚Æ‚­
+	int* B_mp;
 
-	for (int i = 0; i < EPnum; i++)
+	B_hp = new int[Pnum];
+	B_mp = new int[Pnum];
+
+	for (int i = 0; i < Pnum; i++)
+	{
+		B_hp[i] = brave[i]->GetHP();
+		B_mp[i] = brave[i]->NPGet();
+	}
+
+	
+	const int EPnum = Enum + Pnum;//—EÒ+ƒ‚ƒ“ƒXƒ^[‚Ì‡Œv
+	bool speedBool[10];//s“®‚µ‚½‚©”Û‚©‚ğ”»’è‚·‚é•Ï”//’è”‚Æ‚µ‚Äˆµ‚¦‚È‚¢‚©‚ç‚µ‚å‚¤‚ª‚È‚­‘å‚«‚­—pˆÓ‚µ‚Ä‚¢‚é//Œã‚Å¡‚·
+
+	for (int i = 0; i < EPnum; i++)//‘S‚Ä‚ğs“®‚µ‚Ä‚¢‚È‚¢ó‘Ô‚É‚·‚é
 	{
 		speedBool[i] = false;
 	}
 
-	int* Pspeed;
-	Pspeed = new int[Pnum];
+	int* Pspeed;//ƒvƒŒƒCƒ„[‚Ì•Ï“®‚·‚éƒXƒs[ƒh
+	Pspeed = new int[Pnum];//l”•ª”z—ñ‚ğŠm•Û
 	for (int i = 0; i < Pnum; i++)
 	{
-		Pspeed[i] = brave[i]->SpeedCheck();
+		Pspeed[i] = brave[i]->SpeedCheck();//ƒXƒs[ƒh‚Ì‰Šú’l‚ğ‘ã“ü
 	}
 
-	int* Espeed;
-	Espeed = new int[Enum];
+	int* Espeed;//ƒGƒlƒ~[‚Ì•Ï“®‚·‚éƒXƒs[ƒh
+	Espeed = new int[Enum];//Enum•ª”z—ñ‚ğŠm•Û
 	for (int i = 0; i < Enum; i++)
 	{
-		Espeed[i] = enemy[i]->SpeedCheck();
+		Espeed[i] = enemy[i]->SpeedCheck();//ƒXƒs[ƒh‚Ì‰Šú’l‚ğ‘ã“ü
 	}
 
 	std::cout << "ƒoƒgƒ‹ŠJn" << endl;
 	std::cout << endl;
-	const int MAXMember = Pnum + Enum;
 	for (;;)
 	{
-		EnemyStraightOpen(enemy, Enum, Espeed);
+		EnemyStraightOpen(enemy, Enum, Espeed);//ƒGƒlƒ~[‚ÌƒXƒe[ƒ^ƒX‚Ì•\¦
 		cout << endl;
-		BraveStraightOpen(brave, Pnum, Pspeed);
+		BraveStraightOpen(brave, Pnum, Pspeed);//—EÒ‚ÌƒXƒe[ƒ^ƒX‚Ì•\¦
 
 
-		int ActionValu = SpeedCount(Pspeed, Espeed, Pnum, Enum);
-		if (speedBool[ActionValu] != true)
+		int ActionValu = SpeedCount(Pspeed, Espeed, Pnum, Enum);//Å‘¬‚ÌƒLƒƒƒ‰‚ğ’T‚·//’è”‚É‚µ‚È‚¢‚Ì‚Íspeed‚ğã‚°‚éƒXƒLƒ‹‚ğg‚¤‚½‚ß
+		if (speedBool[ActionValu] != true)//s“®‚µ‚Ä‚È‚©‚Á‚½‚ç
 		{
-			speedBool[ActionValu] = true;
+			speedBool[ActionValu] = true;//s“®‚µ‚½‚±‚Æ‚É‚·‚é
 		}
 		if (Pnum <= ActionValu)//ƒGƒlƒ~[‚ÌUŒ‚
 		{
 			ActionValu -= Pnum;
-			if (ActionValu > Enum)
+			if (ActionValu > Enum)//debug—p
 			{
 				cout << "ƒGƒ‰[" << endl;
 				cout << "ActionValu‚ª" << ActionValu << "‚Å‚µ‚½" << endl;
@@ -199,23 +212,26 @@ void Battle::battleStart(TeamMember* brave[], Enemy* enemy[], int Enum, int Pnum
 			}
 			else//ƒGƒlƒ~[‚ÌUŒ‚
 			{
-				brave[rand() % Pnum]->DamageTrade(enemy[ActionValu]->attack());
-				Espeed[ActionValu] -= 5;
-				next();
+				brave[rand() % Pnum]->DamageTrade(enemy[ActionValu]->attack());//—EÒ‚Ì’N‚©‚ªŠm—¦‚Åenemy‚ÌUŒ‚‚ğó‚¯‚é
+				Espeed[ActionValu] -= 5;//s“®‚µ‚½‚ç‘¬“x‚ğ-5
+				next();//Ÿ‚Ö‚Æƒƒ“ƒNƒbƒVƒ‡ƒ“
 			}
 
 		}
 		else//ƒvƒŒƒCƒ„[‚ÌUŒ‚
 		{
-			int timp = brave[ActionValu]->attack();
-			cout << "’N‚ÉUŒ‚‚µ‚Ü‚·‚©?" << endl;
-			enemy[enemyNameOpen(enemy, Enum)]->DamageTrade(timp);
-			Pspeed[ActionValu] -= 5;
-			next();
+			int timp = brave[ActionValu]->attack();//—EÒ‚Ìattack‚Ìƒ_ƒ[ƒW‚ğˆê“I‚É•Û‘¶
+			if (timp != 0)//‰ñ•œ‚È‚ÇUŒ‚‚ğ”º‚í‚È‚¢UŒ‚‚Í0‚ğ•Ô‚·—l‚É‚µ‚Ä‚ ‚é
+			{
+				cout << "’N‚ÉUŒ‚‚µ‚Ü‚·‚©?" << endl;
+				enemy[enemyNameOpen(enemy, Enum)]->DamageTrade(timp);//UŒ‚‘ÎÛ‚ğ‘I‘ğ‚³‚¹‚é
+			}
+			Pspeed[ActionValu] -= 5;//UŒ‚‚µ‚½‚çƒXƒs[ƒh‚ğ-5
+			next();//Ÿ‚Ö‚Æƒƒ“ƒNƒbƒVƒ‡ƒ“
 		}
 
 
-		int	booltimp = 0;
+		int	booltimp = 0;//true‚Ì”‚¾‚¯‘‚¦‚é
 		for (int i = 0; i < EPnum; i++)//s“®‚µ‚Ä‚¢‚é‚©”‚¦‚é
 		{
 			if (speedBool[i] == true)
@@ -228,52 +244,52 @@ void Battle::battleStart(TeamMember* brave[], Enemy* enemy[], int Enum, int Pnum
 		{
 			for (int i = 0; i < Pnum; i++)
 			{
-				Pspeed[i] = brave[i]->SpeedCheck();//Œ³‚Ìspeed‚ğ•Ô‚·ŠÖ”
+				Pspeed[i] = brave[i]->SpeedCheck();//speed‚ğ‰Šú‰»
 			}
 			for (int i = 0; i < Enum; i++)
 			{
-				Espeed[i] = enemy[i]->SpeedCheck();
+				Espeed[i] = enemy[i]->SpeedCheck();//speed‚ğ‰Šú‰»
 			}
 		}
 
 
-		int EHPMAX = 0;
-		for (int i = 0; i < Enum; i++)//“G‚Ì‘Sˆõ‚Ì‘Ì—Í‚ÆŒ‚”j‚³‚ê‚½ƒ‚ƒ“ƒXƒ^[‚ğ•\¦‚³‚¹‚È‚¢ˆ—
+		int EHPMAX = 0;//“G‚Ì‘Ì—Í‚Ì‡Œv
+		for (int i = 0; i < Enum; i++)//“G‚Ì‘Sˆõ‚Ì‘Ì—Í‚ğŒvZ// Œ‚”j‚³‚ê‚½ƒ‚ƒ“ƒXƒ^[‚Íswap‚µ‚Ä¶‚«‚Ä‚¢‚éƒ‚ƒ“ƒXƒ^[‚Ìˆê”Ô‰E‚É‚Á‚Ä‚¢‚­
 		{
-			int timp = enemy[i]->GetHP();
-			if (timp <= 0)
+			int timp = enemy[i]->GetHP();//ˆê“I‚ÉHP‚ğ•Û‘¶
+			if (timp <= 0)//‚à‚µHP‚ª0ˆÈ‰º‚È‚ç
 			{
 				cout << enemy[i]->getName() << "‚ğŒ‚”j‚µ‚½" << endl;
-				for (int j = i; j < Enum; j++)
+				for (int j = i; j < Enum; j++)//ˆê”Ô¶‚«‚Ä‚¢‚é’†‚Å‰E‚É“’B‚·‚é‚Ü‚ÅŒJ‚è•Ô‚·
 				{
-					if (j != Enum - 1)
+					if (j != Enum - 1)//‰E‚É“’B‚µ‚Ä‚¢‚é‚©”»’è
 					{
-						swap(enemy[j], enemy[j + 1]);
+						swap(enemy[j], enemy[j + 1]);//ƒXƒƒbƒv
 					}
 				}
-				Enum -= 1;
+				Enum -= 1;//ƒ‚ƒ“ƒXƒ^[‚Ì”‚ğˆêlŒ¸‚ç‚· //‚±‚±‚ÅŒoŒ±’l‚Ægold‚ğ”‚¦‚é—\’è‚¾‚Á‚½
 				cout << "c‚è‚Ì“G‚Í" << Enum << "‘Ì" << endl;
-				next();
+				next();//Ÿ‚Ö‚Åƒƒ“ƒNƒbƒVƒ‡ƒ“
 			}
-			EHPMAX += timp;
+			EHPMAX += timp;//Å‘åHP‚ğ’Ç‰Á
 		}
 
-		int BHPMAX = 0;
-		for (int i = 0; i < Pnum; i++)//ƒvƒŒƒCƒ„[‚Ì‘Ì—Ícount
+		int BHPMAX = 0;//—EÒƒ`[ƒ€‘Sˆõ‚ÌHP‚ğ‡Œv‚µ‚½”‚ğ“ü‚ê‚é•Ï”
+		for (int i = 0; i < Pnum; i++)//ƒvƒŒƒCƒ„[‚Ì‘Ì—ÍƒJƒEƒ“ƒg
 		{
-			int timp = brave[i]->GetHP();
-			if (timp <= 0)
+			int timp = brave[i]->GetHP();//ˆê“I‚ÉHP‚ğŠi”[
+			if (timp <= 0)//HP‚ª0ˆÈ‰º‚È‚ç
 			{
-				for (int j = i; j < Pnum; j++)
+				for (int j = i; j < Pnum; j++)//ˆê”Ô¶‚«‚Ä‚¢‚é’†‚Å‰E‚É“’B‚·‚é‚Ü‚ÅŒJ‚è•Ô‚·
 				{
-					if (j != Pnum - 1)
+					if (j != Pnum - 1)//‰E‚É“’B‚µ‚Ä‚¢‚é‚©”»’è
 					{
-						swap(brave[j], brave[j + 1]);
+						swap(brave[j], brave[j + 1]); //ƒXƒƒbƒv
 					}
 				}
-				Pnum -= 1;
+				Pnum -= 1;//—EÒ‚Ì”‚ğˆêlŒ¸‚ç‚·
 			}
-			BHPMAX += timp;
+			BHPMAX += timp;//Å‘å‚ÌHP‚ğ”‚¦‚é
 		}
 
 		if (BHPMAX <= 0)//Ÿ”s”»’è
@@ -290,14 +306,21 @@ void Battle::battleStart(TeamMember* brave[], Enemy* enemy[], int Enum, int Pnum
 
 	}
 
+	for (int i = 0; i < Pnum; i++)//HP‚ÆMP‚Ì‰Šú‰»
+	{
+		brave[i]->HPNPfullset(B_hp[i], B_mp[i]);
+	}
+
 	if (Pspeed != nullptr)
 	{
+		delete B_hp;
+		delete B_mp;
 		delete Pspeed;
 	}
 	if (Espeed != nullptr)
 	{
 		delete Espeed;
 	}
-	std::cout << "í“¬I—¹" << endl;
+	std::cout << "í“¬I—¹" << endl;//Œ¸‚Á‚½HP‚ÆNP‚ğ‰Šú’l‚É–ß‚·
 
 }

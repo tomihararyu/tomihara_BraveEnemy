@@ -7,17 +7,17 @@ TeamMember::TeamMember(const char* name) :Character(name)
 {
 
 }
-int TeamMember::attack()
+int TeamMember::attack()//攻撃
 {
 	cout << endl;
 	cout << _pName << "の行動を選択してください。　>";
-	for (int i = 0; i < skillMAXnum; i++)
+	for (int i = 0; i < skillMAXnum; i++)//名前とNPを所持しているスキルと共に表示する
 	{
 		cout << i + 1 << "=" << skillCharNam[SkillProcess[i]] << ":NP=" << skillCharNP[SkillProcess[i]] << "   ";
 	}
-	int timp;
 	for (;;)
 	{
+		int timp;//一時的にプレイヤーに入力させる変数
 		cout << endl << "cin>>";
 		cin >> timp;
 		if (timp <= 0)
@@ -26,18 +26,25 @@ int TeamMember::attack()
 		}
 		else if (timp <= skillMAXnum)
 		{
-			if (state[NP] < skillCharNP[SkillProcess[timp - 1]])
+			if (state[NP] < skillCharNP[SkillProcess[timp - 1]])//自身の持っているNPと使用にかかるNPを比較する
 			{
 				cout << "NPが足りません。もう一度入力してください。" << endl;
 				continue;
 			}
+			int dm = (this->*Skillpul[SkillProcess[timp - 1]])();//入力した番号の関数を呼び出す//thisってなんだよ//隠し引数らしい
+			return dm;
 			break;
 		}
 		else
 		{
 			cout << "もう一度入力してください。" << endl;
 		}
+		cout << "バグが起きました" << endl;
 	}
-	int dm = (this->*Skillpul[SkillProcess[timp - 1]])();//thisってなんだよ//隠し引数らしい
-	return dm;
+
+}
+void TeamMember::HPNPfullset(int hp, int np)
+{
+	state[HP] = hp;
+	state[NP] = np;
 }

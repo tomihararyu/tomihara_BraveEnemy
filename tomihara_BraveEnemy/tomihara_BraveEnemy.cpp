@@ -28,7 +28,9 @@ int main()
 
 	Battle battle;
 
-	battle.battleStart(brave, enemy, Enum, Pnum);
+	battle.battleStart(brave, enemy, Enum, Pnum);//戦闘を開始
+
+	brave[0]->ChangeName();//debug用で置いてある
 
 	for (int i = 0; i < Enum; i++)
 	{
@@ -47,23 +49,17 @@ int main()
 
 }
 //次にやることリスト
-//battle関数を複数モンスターに対応するようにする
 //複数のモンスターの生成関数
 //名前やステータス設定を細かく
-//勝敗判定の変更
-//可読性を上げる
-//enemi関数を作る
+
 
 
 //そのうちやりたいことリスト
 //レベル概念
 //経験値
 //アイテム
-//ある程度のストリー
-//テイム
-//敗北時の教会
 //スキルを増やす
-//自動でモンスターを生成＆playerの成長に併せて強化
+
 
 // プログラムの実行: Ctrl + F5 または [デバッグ] > [デバッグなしで開始] メニュー
 // プログラムのデバッグ: F5 または [デバッグ] > [デバッグの開始] メニュー

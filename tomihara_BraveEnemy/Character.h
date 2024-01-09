@@ -35,23 +35,21 @@ protected:
 	int skillMAXnum;//持っているスキルの数
 
 protected:
-	void ChangeName();//名前を変更する関数
 	void SkillConstructorLook();//所持しているスキルのナンバーをSkillProcessに入れる
 	virtual int attack();
 
 public://主に戦闘で使用する関数
 	void DamageTrade(int Damege);//ダメージの判定
-	bool HPbool(int num);
+	//bool HPbool(int num);
 
 public://表示関数 別のclassにしたい
 	int GetHP();//HPを返す関数
-	int NPGet();
+	int NPGet();//NPを返す関数
 	int SpeedCheck();//スピードを返す関数
 	void AllstateOpen();//全てのステータスを表示する関数
 	void SkillOpen();//スキルを表示する関数(未実装)
 	const char* getName();//名前を返す関数
-	//void deathjud();//死亡判定
-	//int deathInt();//死亡を返す関数
+	void ChangeName();//名前を変更する関数 //デバックの為にpublicにしてる
 
 
 };
