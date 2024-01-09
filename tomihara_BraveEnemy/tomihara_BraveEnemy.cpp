@@ -32,14 +32,22 @@ int main()
 
 	brave[0]->ChangeName();//debug用で置いてある
 
-	for (int i = 0; i < Enum; i++)
+
+	for (int i = 0; i < Enum; i++)//基本倒したらdelete
 	{
 		if (enemy[i] != nullptr)
 		{
 			delete enemy[i];
 		}
 	}
-	for (int i = 0; i < Pnum; i++)
+
+
+
+
+
+
+
+	for (int i = 0; i < Pnum; i++)//本来はこれを削除するときは最後
 	{
 		if (brave[i] != nullptr)
 		{
